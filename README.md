@@ -607,5 +607,40 @@ git config --global --unset http.proxy
 git config --global --unset https.proxy
 ```
 
-C:\Windows\System32\drivers\etc\hosts
+### 6. Git报错解决：OpenSSL SSL_read: Connection was reset, errno 10054
+
+**1.首先检查C盘下host文件中的github相关访问的域名对应的ip是否正确**
+
+- hosts文件目录：C:\Windows\System32\drivers\etc
+
+- ip地址查询：https://www.ipaddress.com/
+  查询下面三个域名ip：
+  github.com
+  github.global.ssl.fastly.net
+  codeload.Github.com
+
+  
+
+**2.找到hosts文件，将上述三行（带ip）放在末尾，保存。**
+
+
+
+127.0.0.1 powerservice.csii.com.cn
+
+140.82.114.4 github.com
+
+140.82.113.10 codeload.Github.com
+
+**3. cmd刷新DNS： ipconfig /flushdns**
+
+**4. IP地址没有问题的情况下，多上传几次。**
+
+**5. 若前面两步都没有用，修改设置，解除ssl验证。**
+进入Git Bash Here
+
+```cmd
+git config --global http.sslVerify "false"
+```
+
+再次尝试git
 

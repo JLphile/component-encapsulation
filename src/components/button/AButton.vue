@@ -1,6 +1,6 @@
 <template>
-  <h1>父组件传入的数据：{{props.type}}</h1>
-  <h1>子组件处理后的数据：{{theme}}</h1>
+  <!-- <h1>父组件传入的数据：{{props.type}}</h1> -->
+  <!-- <h1>子组件处理后的数据：{{theme}}</h1> -->
   <button class="a-button" :class="theme">
     <slot />
   </button>
