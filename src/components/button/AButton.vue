@@ -1,12 +1,20 @@
 <template>
-  <button class="a-button a-button-primary is-border">primary</button>
-  <button class="a-button a-button-success is-border">success</button>
-  <button class="a-button a-button-warning is-border">warning</button>
-  <button class="a-button a-button-danger is-round" disabled>danger</button>
-  <button class="a-button">默认按钮</button>
+  <h1>父组件传入的数据：{{props.type}}</h1>
+  <h1>子组件处理后的数据：{{theme}}</h1>
+  <button class="a-button" :class="theme">
+    <slot />
+  </button>
 </template>
 
-<script setup></script>
+<script setup>
+import { computed } from "@vue/reactivity";
+
+const props = defineProps({
+  type: String,
+});
+const theme = computed(() => `a-button-${props.type}`);
+console.log(theme);
+</script>
 
 <style lang="scss" scoped>
 .a-button {
@@ -19,6 +27,19 @@
   font-size: 14px;
   color: #606266;
   height: 40px;
+}
+.a-button-medium {
+  height: 36px;
+}
+.a-button-small {
+  padding: 0 15px;
+  height: 32px;
+  font-size: 12px;
+}
+.a-button-mini {
+  padding: 0 15px;
+  height: 28px;
+  font-size: 12px;
 }
 .a-button[disabled] {
   opacity: 0.5;

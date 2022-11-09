@@ -1,13 +1,13 @@
 <template>
   <div class="home">
-    <AButton />
+    <AButton :type="type">{{type}}</AButton>
   </div>
 </template>
 
 <script setup>
-import AButton from '../components/button/AButton.vue';
+import AButton from "../components/button/AButton.vue";
+
+const type = "success";
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>
