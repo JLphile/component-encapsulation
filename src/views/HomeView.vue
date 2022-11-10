@@ -1,14 +1,26 @@
 <template>
   <div class="home">
     <AButton size="small">默认按钮</AButton>
-    <AButton type="primary" vborder>primary</AButton>
-    <AButton type="success" vborder round>success</AButton>
-    <AButton type="warning" min-width="160px" round>warning</AButton>
-    <AButton type="danger" size="mini" vborder disabled>danger</AButton>
+    <AButton type="primary" prefix="shangchuanshuju" vborder round size="small"
+      >primary</AButton
+    >
+    <AButton
+      type="success"
+      suffix="icon-daohang"
+      vborder
+      round
+      size="mini"
+      disabled
+      >success</AButton
+    >
+    <AButton type="warning" prefix="tongzhi" min-width="160px">warning</AButton>
+    <AButton type="danger" suffix="xingxing" vborder min-width="300px">danger</AButton>
   </div>
 </template>
 
 <script setup>
+// @ is an alias to /src
+
 import AButton from "../components/button/AButton.vue";
 </script>
 

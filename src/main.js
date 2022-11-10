@@ -6,6 +6,9 @@ import router from "./router";
 
 import "./assets/main.css";
 
+// iconfont
+import './components/icons/iconfont.css'
+
 const app = createApp(App);
 
 app.use(createPinia());

@@ -5,7 +5,11 @@
     :disabled="disabled"
     :style="[minWidthCss]"
   >
-    <slot />
+    <span>
+      <i v-if="iconPrefix" class="iconfont icon-prefix" :class="iconPrefix"></i>
+      <slot />
+      <i v-if="iconSuffix" class="iconfont icon-suffix" :class="iconSuffix"></i>
+    </span>
   </button>
 </template>
 
@@ -22,6 +26,14 @@ const props = defineProps({
     default: "",
   },
   minWidth: {
+    type: String,
+    default: "",
+  },
+  prefix: {
+    type: String,
+    default: "",
+  },
+  suffix: {
     type: String,
     default: "",
   },
@@ -47,6 +59,14 @@ const minWidthCss = computed(() => {
   }
   return { "min-width": props.minWidth };
 });
+// 前缀图标处理
+const iconPrefix = computed(() => {
+  return props.prefix ? `icon-${props.prefix}` : "";
+});
+// 后缀图标处理
+const iconSuffix = computed(() => {
+  return props.suffix ? `icon-${props.suffix}` : "";
+});
 </script>
 
 <style lang="scss" scoped>
@@ -60,6 +80,24 @@ const minWidthCss = computed(() => {
   font-size: 14px;
   color: #606266;
   height: 40px;
+  + .a-button{
+    margin-left: 14px;
+  }
+  > span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  i {
+    width: 14px;
+    height: 14px;
+  }
+  .icon-prefix {
+    margin-right: 10px;
+  }
+  .icon-suffix {
+    margin-left: 10px;
+  }
 }
 .a-button-medium {
   height: 36px;
@@ -68,11 +106,23 @@ const minWidthCss = computed(() => {
   padding: 0 15px;
   height: 32px;
   font-size: 12px;
+  .icon-prefix {
+    margin-right: 5px;
+  }
+  .icon-suffix {
+    margin-left: 5px;
+  }
 }
 .a-button-mini {
   padding: 0 15px;
   height: 28px;
   font-size: 12px;
+  .icon-prefix {
+    margin-right: 5px;
+  }
+  .icon-suffix {
+    margin-left: 5px;
+  }
 }
 .a-button[disabled] {
   opacity: 0.5;
