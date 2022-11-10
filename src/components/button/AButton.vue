@@ -1,16 +1,9 @@
 <template>
-<<<<<<< HEAD
-  <!-- <h1>{{ props.type }}</h1> -->
   <button
     class="a-button"
     :class="[vtype, isBorder, isRound, vsize]"
     :disabled="disabled"
   >
-=======
-  <h1>父组件传入的数据：{{props.type}}</h1>
-  <h1>子组件处理后的数据：{{theme}}</h1>
-  <button class="a-button" :class="theme">
->>>>>>> 4494f7ebb79a7aa53a77fcc518de3ff4a4618d9b
     <slot />
   </button>
 </template>
@@ -19,7 +12,6 @@
 import { computed } from "@vue/reactivity";
 
 const props = defineProps({
-<<<<<<< HEAD
   type: {
     type: String,
     default: "",
@@ -44,12 +36,6 @@ const isBorder = computed(() => {
 const isRound = computed(() => {
   return props.round ? "is-round" : "";
 });
-=======
-  type: String,
-});
-const theme = computed(() => `a-button-${props.type}`);
-console.log(theme);
->>>>>>> 4494f7ebb79a7aa53a77fcc518de3ff4a4618d9b
 </script>
 
 <style lang="scss" scoped>
