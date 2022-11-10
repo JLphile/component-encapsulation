@@ -3,6 +3,7 @@
     class="a-button"
     :class="[vtype, isBorder, isRound, vsize]"
     :disabled="disabled"
+    :style="[minWidthCss]"
   >
     <slot />
   </button>
@@ -20,6 +21,10 @@ const props = defineProps({
     size: String,
     default: "",
   },
+  minWidth: {
+    type: String,
+    default: "",
+  },
   vborder: Boolean,
   round: Boolean,
   disabled: Boolean,
@@ -35,6 +40,12 @@ const isBorder = computed(() => {
 });
 const isRound = computed(() => {
   return props.round ? "is-round" : "";
+});
+const minWidthCss = computed(() => {
+  if (!props.minWidth) {
+    return "";
+  }
+  return { "min-width": props.minWidth };
 });
 </script>
 
