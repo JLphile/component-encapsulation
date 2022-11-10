@@ -1,7 +1,7 @@
 <template>
   <button
     class="a-button"
-    :class="[vtype, isBorder, isRound, vsize]"
+    :class="[vtype, isBorder, isRound, vsize, blockCss]"
     :disabled="disabled"
     :style="[minWidthCss]"
   >
@@ -40,6 +40,7 @@ const props = defineProps({
   vborder: Boolean,
   round: Boolean,
   disabled: Boolean,
+  block: Boolean,
 });
 const vtype = computed(() => {
   return props.type ? `a-button-${props.type}` : "";
@@ -67,6 +68,10 @@ const iconPrefix = computed(() => {
 const iconSuffix = computed(() => {
   return props.suffix ? `icon-${props.suffix}` : "";
 });
+// 设置块级元素
+const blockCss = computed(() => {
+  return props.block ? 'a-button-block' : "";
+});
 </script>
 
 <style lang="scss" scoped>
@@ -80,7 +85,7 @@ const iconSuffix = computed(() => {
   font-size: 14px;
   color: #606266;
   height: 40px;
-  + .a-button{
+  + .a-button {
     margin-left: 14px;
   }
   > span {
@@ -167,5 +172,10 @@ const iconSuffix = computed(() => {
 /**圆角 */
 .is-round {
   border-radius: 100px;
+}
+/**块级按钮 */
+.a-button-block {
+  display: block;
+  width: 100%;
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
   <div class="home">
-    <AButton size="small">默认按钮</AButton>
-    <AButton type="primary" prefix="shangchuanshuju" vborder round size="small"
+    <AButton size="small" block>默认按钮</AButton>
+    <AButton type="primary" block prefix="shangchuanshuju" vborder round size="small"
       >primary</AButton
     >
     <AButton
