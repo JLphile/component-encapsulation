@@ -1,3 +1,7 @@
+
+
+
+
 # component-encapsulation
 
 This template should help get you started developing with Vue 3 in Vite.
@@ -339,6 +343,114 @@ a,
 
 ```
 
+
+
+## 4. vue3.0之组件通信详解(defineProps、defineEmits、defineExpose)
+
+
+
+ 我们在做vue项目中，我们总会遇到组件引入，在嵌套组件中我们的父级组件中引入子级组件中的值，或者在子组件中我们使用父组件中的值。那么当我们遇到这样的场景我们应该怎么做，在vue2.0中，我们使用props和emit进行父子之间的通信，兄弟之间用事件中央总线(event bus)；在vue3.2的语法中我们则使用defineProps和defineEmits来声明props和emit，用其进行组件之间的传值，那么接下来，我们来看看。
+
+**defineProps：**
+
+​    1、用于组件通信中父级组件给子级组件传值，其用来声明props,其接收值为props选项相同的值
+
+​    2、默认支持常见的类型检查，在ts下，我们需要明确变量的类型，类型经常是我们的自定义类型
+
+​    3、只能在<script setup>中使用
+
+​    4、不需要被导入即可使用,它会在编译<script setup>语法块时一同编译掉
+
+​    5、必须在<script setup>的顶层使用，不可以在<script setup>的局部变量中引用
+
+​    6、不可以访问 <script setup> 中定义的其他变量，因为在编译时整个表达式都会被移到外部的函数中
+
+```vue
+// 父级组件使用自定义属性向下传递值
+<div class="home">
+  <HelloWorld :msg="msg"/>
+</div>
+<script setup>
+import HelloWorld from '@/components/HelloWorld'
+/**
+* 父级组件传递一个自定义属性
+* 和props传递方式一样
+* @type {string}
+*/
+const msg = '张三';
+</script>
+// 子级组件使用defineProps接收值
+<div class="hello">
+  <h1>{{ props.msg }}</h1>
+</div>
+<script setup>
+/**
+* 无需导入直接使用
+* 写在<script setup>里面
+* defineProps传入的对象key值就是传递的属性，父级传入msg，那么子级接收msg，定义其类型
+* @type {Readonly<ExtractPropTypes<{msg: StringConstructor}>>}
+* 以下props就是defineProps返回的对象
+*/
+const props = defineProps({
+  msg: String,
+});
+</script>
+<script setup>
+/**
+* 如果写在局部
+* 报错：Uncaught ReferenceError: defineProps is not defined*/
+const btn = function (){
+  const props = defineProps({
+    msg: String,
+  });
+}
+</script>
+```
+
+**实例**
+
+```vue
+//父组件
+<template>
+  <div class="home">
+    <AButton :type="type">{{type}}</AButton>
+  </div>
+</template>
+
+<script setup>
+import AButton from "../components/button/AButton.vue";
+
+const type = "success";
+</script>
+
+<style lang="scss" scoped></style>
+
+```
+
+```vue
+//子组件
+<template>
+  <h1>父组件传入的数据：{{props.type}}</h1>
+  <h1>子组件处理后的数据：{{theme}}</h1>
+  <button class="a-button" :class="theme">
+    <slot />
+  </button>
+</template>
+
+<script setup>
+import { computed } from "@vue/reactivity";
+
+const props = defineProps({
+  type: String,
+});
+const theme = computed(() => `a-button-${props.type}`);
+console.log(theme);
+</script>
+
+```
+
+
+
 # 七、问题
 
 ### 1.文本中每行都有Delete `␍`
@@ -409,7 +521,7 @@ const getDate = function () {
 
 
 
-## 一：安装[sass](https://so.csdn.net/so/search?q=sass&spm=1001.2101.3001.7020)
+##### 一：安装[sass](https://so.csdn.net/so/search?q=sass&spm=1001.2101.3001.7020)
 
 vite有内置的sass配置信息，所以直接安装sass即可
 
@@ -420,7 +532,7 @@ npm install --save-dev sass
 
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/1c6b5352c7dd48808894fb7090ef710c.png)
 
-## 二：编写全局css变量/全局mixin
+##### 二：编写全局css变量/全局mixin
 
 在assets文件夹下创建scss目录，添加globalMixin.scss和globalVar.scss文件
 
@@ -442,9 +554,9 @@ $bg-color: #1989fa;
 12345678910
 ```
 
-## 三：引入
+##### 三：引入
 
-### 全局引入
+###### 全局引入
 
 打开项目目录下vite.config.js文件，添加配置信息
 
@@ -469,13 +581,13 @@ css: {
 
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/aebb7b08e9a04df29c92b5f1c362b296.png)
 
-### 按需引入
+###### 按需引入
 
 在需要使用的style里import引入即可使用
 
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/d09c35f579034c869088ccb0574f6ee6.png)
 
-## 四：注意事项
+##### 四：注意事项
 
 **使用sass的时候，是使用`lang=scss`并不是`lang=sass`，否则样式会失去高亮且代码报错**
 
@@ -483,7 +595,17 @@ css: {
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/06db2316d22b4c9e995a87bf3345a6b1.png)
 over~
 
+### 5.Clone Github失败的解决全过程
 
+清除代理设置：命令如下：
 
+​		
 
+```cmd
+git config --global --unset http.proxy
+
+git config --global --unset https.proxy
+```
+
+C:\Windows\System32\drivers\etc\hosts
 

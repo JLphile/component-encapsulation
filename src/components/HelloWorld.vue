@@ -1,13 +1,7 @@
-<script setup>
-
-</script>
+<script setup></script>
 
 <template>
-  <div class="greetings">
-    HelloWorld component
-  </div>
+  <div class="greetings">HelloWorld component</div>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>
