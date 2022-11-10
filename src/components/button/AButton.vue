@@ -1,7 +1,10 @@
 <template>
-  <!-- <h1>父组件传入的数据：{{props.type}}</h1> -->
-  <!-- <h1>子组件处理后的数据：{{theme}}</h1> -->
-  <button class="a-button" :class="theme">
+  <button
+    class="a-button"
+    :class="[vtype, isBorder, isRound, vsize]"
+    :disabled="disabled"
+    :style="[minWidthCss]"
+  >
     <slot />
   </button>
 </template>
@@ -10,10 +13,40 @@
 import { computed } from "@vue/reactivity";
 
 const props = defineProps({
-  type: String,
+  type: {
+    type: String,
+    default: "",
+  },
+  size: {
+    size: String,
+    default: "",
+  },
+  minWidth: {
+    type: String,
+    default: "",
+  },
+  vborder: Boolean,
+  round: Boolean,
+  disabled: Boolean,
 });
-const theme = computed(() => `a-button-${props.type}`);
-console.log(theme);
+const vtype = computed(() => {
+  return props.type ? `a-button-${props.type}` : "";
+});
+const vsize = computed(() => {
+  return props.size ? `a-button-${props.size}` : "";
+});
+const isBorder = computed(() => {
+  return props.vborder ? "is-border" : "";
+});
+const isRound = computed(() => {
+  return props.round ? "is-round" : "";
+});
+const minWidthCss = computed(() => {
+  if (!props.minWidth) {
+    return "";
+  }
+  return { "min-width": props.minWidth };
+});
 </script>
 
 <style lang="scss" scoped>
