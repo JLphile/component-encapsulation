@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <AButton>默认按钮</AButton>
+    <AButton size="small">默认按钮</AButton>
     <AButton type="primary" vborder>primary</AButton>
     <AButton type="success" vborder round>success</AButton>
     <AButton type="warning" round>warning</AButton>
