@@ -449,6 +449,80 @@ console.log(theme);
 
 ```
 
+## 5. vue3 defineEmits <setup>语法糖写法
+
+> 子组件接收父级组件中定义的事件
+
+```dart
+//父级组件定义update-list事件
+<Operate :param="scope.row.id" @update-list="getList()" />
+//=============================================
+//子组件Operate接收updateList事件 使用驼峰方式书写
+const emits = defineEmits(['updateList']);
+//子组件中调用方法
+emits('updateList')
+```
+
+> 子组件接收参数
+
+```tsx
+const props = defineProps({
+  params: {
+    type: Object,
+    default: () => { }
+  },
+  flag: {
+    type: Number,
+    default: 0
+  }
+})
+// 动态数据
+const { params } = toRefs(props)
+```
+
+> 子组件向父级暴露函数
+
+```csharp
+const getUserList = () => {
+  //.......
+}
+defineExpose({
+  getUserList
+})
+
+//父级方法中调用
+
+<Child ref="child" />
+.....
+const child= ref()
+child.value.getUserList()
+```
+
+> 监听父级参数
+
+```tsx
+const props = defineProps({
+  detailInfo: {
+    type: Object,
+    default: () => { }
+  },
+})
+const { detailInfo } = toRefs(props);
+
+
+watch([props], () => {
+  // show.value = true;
+  console.log(detailInfo.value, 'detailInfo.value');
+  // if (!detailInfo.value.dealFlag || detailInfo.value.dealFlag == 0) update({ id: detailInfo.value.id, dealFlag: 1 }, 'flag')
+});
+```
+
+
+
+
+
+
+
 
 
 # 七、问题

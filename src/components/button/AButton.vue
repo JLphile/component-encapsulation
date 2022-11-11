@@ -1,6 +1,6 @@
 <template>
   <button
-    @click="$emit('change','click')"
+    @click="change"
     class="a-button"
     :class="[vtype, isBorder, isRound, vsize, blockCss]"
     :disabled="disabled || loading"
@@ -76,8 +76,10 @@ const blockCss = computed(() => {
   return props.block ? "a-button-block" : "";
 });
 
-// 事件回调
-
+// 定义一个子传父事件-parentClick
+const emits = defineEmits(["parentClick"]);
+// 点击按钮时候通过change方法将parentClick 发射给父组件
+const change = () => emits("parentClick",'我是子组件传递的信息');
 </script>
 
 <style lang="scss" scoped>
@@ -193,10 +195,10 @@ const blockCss = computed(() => {
 }
 @-webkit-keyframes loading {
   0% {
-    -webkit-transform: rotate(0deg) translateZ(0);
+    -webkit-transform: rotate(0deg);
   }
   100% {
-    -webkit-transform: rotate(360deg) translateZ(0);
+    -webkit-transform: rotate(360deg);
   }
 }
 </style>
