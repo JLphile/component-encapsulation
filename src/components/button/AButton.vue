@@ -2,10 +2,11 @@
   <button
     class="a-button"
     :class="[vtype, isBorder, isRound, vsize, blockCss]"
-    :disabled="disabled"
+    :disabled="disabled || loading"
     :style="[minWidthCss]"
   >
     <span>
+      <i v-if="loading" class="iconfont icon-prefix icon-loading"></i>
       <i v-if="iconPrefix" class="iconfont icon-prefix" :class="iconPrefix"></i>
       <slot />
       <i v-if="iconSuffix" class="iconfont icon-suffix" :class="iconSuffix"></i>
@@ -22,7 +23,7 @@ const props = defineProps({
     default: "",
   },
   size: {
-    size: String,
+    type: String,
     default: "",
   },
   minWidth: {
@@ -37,6 +38,7 @@ const props = defineProps({
     type: String,
     default: "",
   },
+  loading: Boolean,
   vborder: Boolean,
   round: Boolean,
   disabled: Boolean,
@@ -70,7 +72,7 @@ const iconSuffix = computed(() => {
 });
 // 设置块级元素
 const blockCss = computed(() => {
-  return props.block ? 'a-button-block' : "";
+  return props.block ? "a-button-block" : "";
 });
 </script>
 
@@ -177,5 +179,20 @@ const blockCss = computed(() => {
 .a-button-block {
   display: block;
   width: 100%;
+}
+/**加载动画 */
+.icon-loading {
+  display: inline-block;
+  animation: loading 2s infinite linear;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+@-webkit-keyframes loading {
+  0% {
+    -webkit-transform: rotate(0deg) translateZ(0);
+  }
+  100% {
+    -webkit-transform: rotate(360deg) translateZ(0);
+  }
 }
 </style>

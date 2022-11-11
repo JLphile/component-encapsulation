@@ -1,7 +1,13 @@
 <template>
   <div class="home">
-    <AButton size="small" block>默认按钮</AButton>
-    <AButton type="primary" block prefix="shangchuanshuju" vborder round size="small"
+    <AButton  size="small" :loading="true">默认按钮</AButton>
+    <AButton
+      type="primary"
+      block
+      prefix="shangchuanshuju"
+      vborder
+      round
+      size="small"
       >primary</AButton
     >
     <AButton
@@ -14,7 +20,9 @@
       >success</AButton
     >
     <AButton type="warning" prefix="tongzhi" min-width="160px">warning</AButton>
-    <AButton type="danger" suffix="xingxing" vborder min-width="300px">danger</AButton>
+    <AButton type="danger" suffix="xingxing" vborder min-width="300px"
+      >danger</AButton
+    >
   </div>
 </template>
 
