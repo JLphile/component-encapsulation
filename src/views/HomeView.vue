@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <AButton  size="small" :loading="true">默认按钮</AButton>
+    <AButton type="success" @click="handlerChange">默认按钮</AButton>
     <AButton
       type="primary"
       block
@@ -30,6 +30,10 @@
 // @ is an alias to /src
 
 import AButton from "../components/button/AButton.vue";
+
+const handlerChange = () => {
+  console.log(333);
+};
 </script>
 
 <style lang="scss" scoped></style>

@@ -1,5 +1,6 @@
 <template>
   <button
+    @click="$emit('change','click')"
     class="a-button"
     :class="[vtype, isBorder, isRound, vsize, blockCss]"
     :disabled="disabled || loading"
@@ -74,6 +75,9 @@ const iconSuffix = computed(() => {
 const blockCss = computed(() => {
   return props.block ? "a-button-block" : "";
 });
+
+// 事件回调
+
 </script>
 
 <style lang="scss" scoped>
