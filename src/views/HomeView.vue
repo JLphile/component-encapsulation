@@ -1,6 +1,8 @@
 <template>
   <div class="home">
-    <AButton type="success" @click="handlerChange">默认按钮</AButton>
+    <AButton type="success" :loading="flag" @click="handlerChange"
+      >默认按钮</AButton
+    >
     <AButton
       type="primary"
       block
@@ -31,9 +33,12 @@
 
 import AButton from "../components/button/AButton.vue";
 
-const handlerChange = () => {
-  console.log(333);
-};
+import { ref } from "vue";
+const flag = ref(false);
+
+const handlerChange=()=> {
+  flag.value = true;
+}
 </script>
 
 <style lang="scss" scoped></style>
