@@ -523,7 +523,11 @@ watch([props], () => {
 
 ```vue
 //父组件 通过 :before-change 向子组件传入 asyncFunction 函数
+<template>
 <AButton type="success" :before-change="asyncFunction">默认按钮</AButton>
+</template>
+
+<script setup>
 ...
 const asyncFunction = () => {
   return new Promise((resolve, reject) => {
@@ -532,6 +536,8 @@ const asyncFunction = () => {
     }, 3000);
   });
 };
+</script>
+
 ```
 
 ```vue
