@@ -8,10 +8,7 @@
     >
     <AButton
       type="primary"
-      block
       prefix="shangchuanshuju"
-      vborder
-      round
       size="small"
       >primary</AButton
     >
@@ -24,7 +21,7 @@
       disabled
       >success</AButton
     >
-    <AButton type="warning" prefix="tongzhi" min-width="160px">warning</AButton>
+    <AButton type="warning" prefix="tongzhi" min-width="160px" round>warning</AButton>
     <AButton type="danger" suffix="xingxing" vborder min-width="300px"
       >danger</AButton
     >

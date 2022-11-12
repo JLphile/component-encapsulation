@@ -807,7 +807,7 @@ git config --global --unset https.proxy
 
 ### 6. Git报错解决：OpenSSL SSL_read: Connection was reset, errno 10054
 
-**1.首先检查C盘下host文件中的github相关访问的域名对应的ip是否正确**
+**6-1.首先检查C盘下host文件中的github相关访问的域名对应的ip是否正确**
 
 - hosts文件目录：C:\Windows\System32\drivers\etc
 
@@ -819,7 +819,7 @@ git config --global --unset https.proxy
 
   
 
-**2.找到hosts文件，将上述三行（带ip）放在末尾，保存。**
+**6-2.找到hosts文件，将上述三行（带ip）放在末尾，保存。**
 
 
 
@@ -829,11 +829,11 @@ git config --global --unset https.proxy
 
 140.82.113.10 codeload.Github.com
 
-**3. cmd刷新DNS： ipconfig /flushdns**
+**6-3. cmd刷新DNS： ipconfig /flushdns**
 
-**4. IP地址没有问题的情况下，多上传几次。**
+**6-4. IP地址没有问题的情况下，多上传几次。**
 
-**5. 若前面两步都没有用，修改设置，解除ssl验证。**
+**6-5. 若前面两步都没有用，修改设置，解除ssl验证。**
 进入Git Bash Here
 
 ```cmd
@@ -841,4 +841,26 @@ git config --global http.sslVerify "false"
 ```
 
 再次尝试git
+
+
+
+### 7. -webkit-keyframes 动画抖动问题
+
+```
+@-webkit-keyframes loading {
+
+ 0% {
+
+  -webkit-transform: rotate(0deg);
+
+ }
+
+ 100% {
+
+  -webkit-transform: rotate(360deg);
+
+ }
+
+}
+```
 

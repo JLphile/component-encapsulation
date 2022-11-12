@@ -17,7 +17,7 @@ export default defineConfig({
       scss: {
         // '@import "assets/scss/globalVar.scss";@import "assets/scss/globalMixin.scss";'
         additionalData:
-          '@import "../src/assets/scss/globalVar.scss";@import "../src/assets/scss/globalMixin.scss";',
+          '@import "../src/assets/scss/globalVar.scss";@import "../src/assets/scss/globalMixin.scss";@import "../src/assets/scss/scssConfig.scss";',
       },
     },
   },
