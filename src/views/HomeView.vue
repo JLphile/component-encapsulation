@@ -3,13 +3,8 @@
     <!-- <AButton type="success" :loading="flag" @parent-click="handlerClick"
       >默认按钮</AButton
     > -->
-    <AButton type="success" :before-change="asyncFunction"
-      >默认按钮</AButton
-    >
-    <AButton
-      type="primary"
-      prefix="shangchuanshuju"
-      size="small"
+    <AButton type="success" :before-change="asyncFunction">默认按钮</AButton>
+    <AButton type="primary" prefix="shangchuanshuju" size="small"
       >primary</AButton
     >
     <AButton
@@ -21,10 +16,19 @@
       disabled
       >success</AButton
     >
-    <AButton type="warning" prefix="tongzhi" min-width="160px" round>warning</AButton>
+    <AButton type="warning" prefix="tongzhi" min-width="160px" round
+      >warning</AButton
+    >
     <AButton type="danger" suffix="xingxing" vborder min-width="300px"
       >danger</AButton
     >
+  </div>
+  <div>
+    <AButton>默认按钮</AButton>
+    <AButton type="primary">primary</AButton>
+    <AButton type="success">success</AButton>
+    <AButton type="warning">warning</AButton>
+    <AButton type="danger">danger</AButton>
   </div>
 </template>
 
