@@ -3,11 +3,11 @@
     @click="change"
     class="a-button"
     :class="[vtype, isBorder, isRound, vsize, blockCss]"
-    :disabled="disabled || loading"
+    :disabled="disabled || loading || load"
     :style="[minWidthCss]"
   >
     <span>
-      <i v-if="loading" class="iconfont icon-prefix icon-loading"></i>
+      <i v-if="loading || load" class="iconfont icon-prefix icon-loading"></i>
       <i v-if="iconPrefix" class="iconfont icon-prefix" :class="iconPrefix"></i>
       <slot />
       <i v-if="iconSuffix" class="iconfont icon-suffix" :class="iconSuffix"></i>
@@ -17,7 +17,7 @@
 
 <script setup>
 import { computed } from "@vue/reactivity";
-
+import { ref } from "vue";
 const props = defineProps({
   type: {
     type: String,
@@ -44,6 +44,7 @@ const props = defineProps({
   round: Boolean,
   disabled: Boolean,
   block: Boolean,
+  beforeChange: Function,
 });
 const vtype = computed(() => {
   return props.type ? `a-button-${props.type}` : "";
@@ -79,7 +80,22 @@ const blockCss = computed(() => {
 // 定义一个子传父事件-parentClick
 const emits = defineEmits(["parentClick"]);
 // 点击按钮时候通过change方法将parentClick 发射给父组件
-const change = () => emits("parentClick",'我是子组件传递的信息');
+// const change = () => emits("parentClick",'我是子组件传递的信息');
+const load = ref(false);
+const change = () => {
+  if (typeof props.beforeChange === "function") {
+    load.value = true;
+    props
+      .beforeChange()
+      .then((response) => {
+        load.value = false;
+      })
+      .catch(() => {
+        load.value = false;
+      });
+  }
+  emits("parentClick", "我是子组件传递的信息");
+};
 </script>
 
 <style lang="scss" scoped>

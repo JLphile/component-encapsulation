@@ -517,6 +517,124 @@ watch([props], () => {
 });
 ```
 
+## 6. button 按钮实现 loading 效果
+
+>   方法一
+
+```vue
+//父组件 通过 :before-change 向子组件传入 asyncFunction 函数
+<AButton type="success" :before-change="asyncFunction">默认按钮</AButton>
+...
+const asyncFunction = () => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve();
+    }, 3000);
+  });
+};
+```
+
+```vue
+//子组件通过宏函数 defineProps()接收 beforeChange
+<script setup>
+const props = defineProps({
+  ...
+  beforeChange: Function,
+});
+
+//通过change 处理
+const load = ref(false);
+const change = () => {
+  if (typeof props.beforeChange === "function") {
+    load.value = true;
+    props
+      .beforeChange()
+      .then((response) => {
+        load.value = false;
+      })
+      .catch(() => {
+        load.value = false;
+      });
+  }
+</script>
+    
+//通过控制load的值 从而改变loading状态
+<template>
+  <button
+    @click="change"
+    class="a-button"
+    :class="[vtype, isBorder, isRound, vsize, blockCss]"
+    :disabled="disabled || loading || load"
+    :style="[minWidthCss]"
+  >
+    <span>
+      <i v-if="loading || load" class="iconfont icon-prefix icon-loading"></i>
+      <i v-if="iconPrefix" class="iconfont icon-prefix" :class="iconPrefix"></i>
+      <slot />
+      <i v-if="iconSuffix" class="iconfont icon-suffix" :class="iconSuffix"></i>
+    </span>
+  </button>
+</template>
+
+
+```
+
+> 方法二
+>
+
+```vue
+// 父组件 监听子组件发射的parent-click 事件，接收后通过 handlerClick 处理
+//通过flag的值 调整loading状态
+<template>  
+    <AButton :loading="flag" @parent-click="handlerClick">默认按钮</AButton>
+<template> 
+
+<script setup>
+import { ref } from "vue";
+
+const flag = ref(false);  
+const handlerClick = (data) => {
+  console.log(data);
+  flag.value = true;
+  setTimeout(() => {
+    flag.value = false;
+    console.log("现在可以重新点击");
+  }, 3000);
+};  
+</script>
+  
+```
+
+
+
+```vue
+//子组件
+<script setup>
+// 定义一个子传父事件-parentClick
+const emits = defineEmits(["parentClick"]);
+  
+// 点击按钮时候通过change方法将parentClick 发射给父组件
+const change = () => emits("parentClick",'我是子组件传递的信息');
+</script>
+
+<template>
+  <button
+    @click="change"
+    class="a-button"
+    :class="[vtype, isBorder, isRound, vsize, blockCss]"
+    :disabled="disabled || loading || load"
+    :style="[minWidthCss]"
+  >
+    <span>
+      <i v-if="loading || load" class="iconfont icon-prefix icon-loading"></i>
+      <i v-if="iconPrefix" class="iconfont icon-prefix" :class="iconPrefix"></i>
+      <slot />
+      <i v-if="iconSuffix" class="iconfont icon-suffix" :class="iconSuffix"></i>
+    </span>
+  </button>
+</template>
+```
+
 
 
 
