@@ -2,7 +2,7 @@
 
 
 
-# component-encapsulation
+# 组件封装component-encapsulation
 
 This template should help get you started developing with Vue 3 in Vite.
 
@@ -37,6 +37,12 @@ npm run build
 ```sh
 npm run lint
 ```
+
+**知识：**
+
+父子组件通信-slot-setup语法糖-Promise函数-scss-iconfont
+
+
 
 # 一.用vite创建项目
 
